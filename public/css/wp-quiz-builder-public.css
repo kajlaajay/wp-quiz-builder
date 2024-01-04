@@ -1,0 +1,185 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+
+ /* Miscellaneous styles */
+ .hide {
+    display: none;
+ }
+
+ .quiz-container {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    flex-wrap: wrap;
+    column-gap: 2%;
+    font-family: "Cabin",sans-serif;
+ }
+
+ .quiz-container .question-wrapper {
+    width: 80%;
+    /* background-color: cornsilk; */
+    padding: 20px;
+ }
+
+ .quiz-container .image-wrapper {
+    width: 18%;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;    
+ }
+
+ .quiz-container .result-container {
+    width: 100%;
+ }
+
+ .quiz-container .main-question .title, .quiz-container .sub-question .title {
+    line-height: 1.4;
+    text-align: center;
+    margin: 0 0 15px;
+    font-size: 32px;
+    font-weight: 500;
+    color: rgba(157,120,254,1);
+ }
+
+ .quiz-container .main-question .answer {
+    position: relative;
+    margin: 15px auto 0;
+    cursor: pointer;
+    text-align: left;
+    border-radius: 0 8px 0 8px;
+    box-shadow: 0 1px 23px 1px rgba(0,0,0,.07), inset 4px 0 0 0 rgba(157,120,254,.51);
+    background-color: #fff;
+    transition: all .15s;
+    height: 100%;
+    padding: 22px 25px;
+ }
+
+ .quiz-container .main-question .answer.selected {
+    box-shadow: 0 1px 23px 1px rgba(0,0,0,.07), inset 4px 0 0 0 rgba(157,120,254,.51);
+    /* background-color: rgba(157,120,254,1); */
+    background-image: linear-gradient(to right, #9e78ff, #8daafc);
+    transition: all .15s;
+ }
+
+ .quiz-container .sub-question .answer {
+    position: relative;
+    margin: 15px auto 0;
+    cursor: pointer;
+    text-align: left;
+    border-radius: 0 8px 0 8px;
+    box-shadow: 0 1px 23px 1px rgba(0,0,0,.07), inset 0px -4px 0 0 rgba(157,120,254,.51);
+    background-color: #fff;
+    transition: all .15s;
+    height: 100%;
+    padding: 22px 25px;
+ }
+
+ .quiz-container .sub-question .answer.selected {
+    box-shadow: 0 1px 23px 1px rgba(0,0,0,.07), inset 4px 0 0 0 rgba(157,120,254,.51);
+    /* background-color: rgba(157,120,254,1); */
+    background-image: linear-gradient(to right, #9e78ff, #8daafc);
+    transition: all .15s;
+ }
+
+ .quiz-container .sub-question .answer img {
+    height: 250px !important;
+ }
+
+ .quiz-container .answer .text {
+    position: relative;
+    font-weight: normal;
+    word-break: break-word;
+    padding-left: 45px;
+    font-size: 18px;
+    color: #666;
+    transition: all .15s;
+ }
+
+ .quiz-container .answer.selected .text {
+    color: #ffffff;
+    transition: all .15s;
+ }
+
+ .quiz-container .answer .fancy-icon {
+    position: absolute;
+    top: 20px;
+    left: 24px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    opacity: .15;
+    background-color: #9e78ff;
+    text-align: center;
+ }
+
+ .quiz-container .answer.selected .fancy-icon {
+    background-color: #ffffff;
+    opacity: 1;
+ }
+
+ .material-symbols-outlined {
+    line-height: 1.1 !important;
+ }
+
+ .quiz-container .answer.selected .fancy-icon .material-symbols-outlined {
+    color: #9e78ff;
+    font-size: 28px;
+ }
+
+ .quiz-container .question-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 40px;
+    vertical-align: middle;
+    line-height: normal;
+    margin-top: 10px;
+ }
+
+ .question-container .question-nav span.prev {
+    padding: 10px;
+    background: #9e78ff;
+    border-radius: 50%;
+    color: #ffffff;
+    cursor: pointer;
+    float: left;
+ }
+
+ .question-container .question-nav span.next {
+    padding: 10px;
+    background: #9e78ff;
+    border-radius: 50%;
+    color: #ffffff;
+    cursor: pointer;
+    float: right;
+ }
+
+ .question-container .question-nav .submit {
+    padding: 10px;
+    background: #9e78ff;
+    /* border-radius: 50%; */
+    color: #ffffff;
+    cursor: pointer;
+    float: right;
+ }
+
+ #image-container .selectedanswer {
+    border: 1px solid #eee;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+ }
+
+ #image-container .selectedanswer .selansimage {
+    height: 70px !important;
+ }
+
+ #image-container .selectedanswer .text {
+    font-size: 12px;
+ }
