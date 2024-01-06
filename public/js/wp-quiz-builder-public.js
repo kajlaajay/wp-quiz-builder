@@ -33,26 +33,50 @@
 
 })( jQuery );
 
-function tickanswer(e,id)
+function tickanswer(e,id,action)
 {
 	var mainElement = document.getElementById(id);
 
-	if (mainElement) {
-		var answersElement = mainElement.querySelector('.answers');
+	if(action == "yes")
+	{
+		if (mainElement) {
+			var answersElement = mainElement.querySelector('.answers');
 
-		if (answersElement) {
-			var allAnswerElements = answersElement.querySelectorAll('.answer');
+			if (answersElement) {
+				var allAnswerElements = answersElement.querySelectorAll('.answer');
 
-			allAnswerElements.forEach(function(element) {
-				element.classList.toggle('selected', element === e);
-			});
+				allAnswerElements.forEach(function(element) {
+					element.classList.toggle('selected', element === e);
+				});
 
+			}
 		}
+
+		document.querySelector('#'+id+' .next').classList.remove("hide");
+		document.querySelector('#'+id+' .submit').classList.add("hide");
+	}
+	else if(action == "no")
+	{
+		if (mainElement) {
+			var answersElement = mainElement.querySelector('.answers');
+
+			if (answersElement) {
+				var allAnswerElements = answersElement.querySelectorAll('.answer');
+
+				allAnswerElements.forEach(function(element) {
+					element.classList.toggle('selected', element === e);
+				});
+
+			}
+		}
+		
+		document.querySelector('#'+id+' .next').classList.add("hide");
+		document.querySelector('#'+id+' .submit').classList.remove("hide");
 	}
 }
 
 var answers = [];
-function selectring(id,action,subid)
+function selectring(id,action,subid,curques,nextques)
 {
 	var mainElement = document.getElementById(id);
 	
@@ -110,19 +134,131 @@ function selectring(id,action,subid)
 	}
 	else if(action == "submit")
 	{
-		var nameelement = document.querySelectorAll('#'+subid+' .text');
-		var imgelement = document.querySelectorAll('#'+subid+' .answerimage');
+		if(subid != "")
+		{
+			var imgelement = document.querySelectorAll('#'+subid+' .answerimage');
 
-		answers.push([nameelement[0].innerHTML,imgelement[0].src]);
-		console.log(answers);
+			answers.push([imgelement[0].src]);
+			console.log(answers);
 
-		document.getElementsByClassName('image-container').innerHTML = "";
-		var out = "";
-		answers.forEach(function(value) {
-			out += `<div class="selectedanswer"><span class="answerimage"><img class="selansimage" src="${value[1]}"></span><span class="text">${value[0]}</span></div>`;
-			// $('.image-container').append(out);
-		})
+			document.getElementsByClassName('image-container').innerHTML = "";
+			var out = "";
+			answers.forEach(function(value) {
+				out += `<div class="selectedanswer"><span class="answerimage"><img class="selansimage" src="${value[0]}"></span></div>`;
+			})
 
-		document.getElementById('image-container').innerHTML = out;
+			document.getElementById('image-container').innerHTML = out;
+			console.log("curques: "+curques);
+			console.log("nextques: "+nextques);
+			document.getElementById(curques).classList.add("hide");
+			
+			if(nextques != "result")
+			{
+				document.getElementById(nextques).classList.remove("hide");
+			}
+			else
+			{
+				document.getElementById('qsection').classList.add("hide");
+				document.getElementById('imgsidebar').classList.add("hide");
+				document.getElementById(nextques).classList.remove("hide");
+				var out = "";
+				answers.forEach(function(value) {
+					out += `<div class="selectedanswer"><span class="answerimage"><img class="selansimage" src="${value[0]}" height="150"></span></div>`;
+				})
+
+				document.getElementById('resultimages').innerHTML = out;
+			}
+		}
+		else if(subid == "")
+		{
+			document.getElementById(curques).classList.add("hide");
+			
+			if(nextques != "result")
+			{
+				document.getElementById(nextques).classList.remove("hide");
+			}
+			else
+			{
+				document.getElementById('qsection').classList.add("hide");
+				document.getElementById('imgsidebar').classList.add("hide");
+				document.getElementById(nextques).classList.remove("hide");
+				var out = "";
+				answers.forEach(function(value) {
+					out += `<div class="selectedanswer"><span class="answerimage"><img class="selansimage" src="${value[0]}" height="150"></span></div>`;
+				})
+
+				document.getElementById('resultimages').innerHTML = out;
+			}
+		}
 	}
 }
+
+window.html2canvas = html2canvas;
+
+function downloadPDF() 
+{
+	var date = new Date();
+	var datetime = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate()+"-"+date.getHours()+"-"+date.getMinutes()+"-"+ date.getSeconds();
+	window.jsPDF = window.jspdf.jsPDF;
+	const pdf = new jsPDF();
+	const element = document.getElementById('printarea');
+
+	// Add the content to the PDF
+	pdf.html(element, {
+		callback: function(doc) {
+			// Save the PDF
+			doc.save('color-ring-quiz-result-'+datetime+'.pdf');
+		},
+		x: 30,
+		y: 15,
+		width: 150, //target width in the PDF document
+		windowWidth: 650 //window width in CSS pixels
+	});
+
+	// Download the PDF
+	// pdf.save('color-ring-quiz.pdf');
+}
+
+function printDiv() 
+{
+	const printContents = document.getElementById('printarea').innerHTML;
+	const originalContents = document.body.innerHTML;
+
+	document.body.innerHTML = printContents;
+	window.print();
+
+	document.body.innerHTML = originalContents;
+}
+
+
+
+
+	// else if(action == "submit")
+	// {
+	// 	if(subid != "")
+	// 	{
+	// 		var nameelement = document.querySelectorAll('#'+subid+' .text');
+	// 		var imgelement = document.querySelectorAll('#'+subid+' .answerimage');
+
+	// 		answers.push([nameelement[0].innerHTML,imgelement[0].src]);
+	// 		console.log(answers);
+
+	// 		document.getElementsByClassName('image-container').innerHTML = "";
+	// 		var out = "";
+	// 		answers.forEach(function(value) {
+	// 			out += `<div class="selectedanswer"><span class="answerimage"><img class="selansimage" src="${value[1]}"></span><span class="text">${value[0]}</span></div>`;
+	// 			// $('.image-container').append(out);
+	// 		})
+
+	// 		document.getElementById('image-container').innerHTML = out;
+	// 		console.log("curques: "+curques);
+	// 		console.log("nextques: "+nextques);
+	// 		document.getElementById(curques).classList.add("hide");
+	// 		document.getElementById(nextques).classList.remove("hide");
+	// 	}
+	// 	else if(subid != "")
+	// 	{
+	// 		document.getElementById(curques).classList.add("hide");
+	// 		document.getElementById(nextques).classList.remove("hide");
+	// 	}
+	// }

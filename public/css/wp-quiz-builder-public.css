@@ -3,9 +3,29 @@
  * included in this file.
  */
 
+ @media print {
+	body {
+		margin: 0;
+		padding: 10px;
+	}
+	
+	#printarea {
+		width: 90%;
+	}
+
+   .result-container .title {
+      line-height: 1.4;
+      text-align: center !important;
+      margin: 0 0 15px;
+      font-size: 32px;
+      font-weight: 500;
+      color: rgba(157,120,254,1);
+   }
+}
+
  /* Miscellaneous styles */
  .hide {
-    display: none;
+    display: none !important;
  }
 
  .quiz-container {
@@ -43,6 +63,24 @@
     font-weight: 500;
     color: rgba(157,120,254,1);
  }
+
+ .result-container .title {
+   line-height: 1.4;
+   text-align: center !important;
+   margin: 0 0 15px;
+   font-size: 32px;
+   font-weight: 500;
+   color: rgba(157,120,254,1);
+}
+
+.result-container .title2 {
+   line-height: 1.4;
+   text-align: center !important;
+   margin: 0 0 15px;
+   font-size: 24px;
+   font-weight: 500;
+   color: rgba(157,120,254,1);
+}
 
  .quiz-container .main-question .answer {
     position: relative;
@@ -86,6 +124,7 @@
 
  .quiz-container .sub-question .answer img {
     height: 250px !important;
+    margin-top: 20px;
  }
 
  .quiz-container .answer .text {
@@ -123,6 +162,7 @@
 
  .material-symbols-outlined {
     line-height: 1.1 !important;
+    font-size: 28px;
  }
 
  .quiz-container .answer.selected .fancy-icon .material-symbols-outlined {
@@ -180,6 +220,37 @@
     height: 70px !important;
  }
 
+ .result-container .selectedanswer .selansimage {
+   height: 150px !important;
+}
+
  #image-container .selectedanswer .text {
     font-size: 12px;
  }
+
+ #resultimages {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+ }
+
+ .result-container {
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   align-items: center;
+}
+
+ .result-container .btn {
+   padding: 10px 30px;
+   background: #9e78ff;
+   /* border-radius: 50%; */
+   color: #ffffff;
+   cursor: pointer;
+   float: right;
+}
+
+.result-container {
+   box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
